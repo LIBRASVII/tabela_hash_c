@@ -24,13 +24,33 @@ void criptografa(urna *cripto) {
     } else if (cripto->mensagem[i] == 'x') {
       cripto->mensagem[i] = 'a';
     } else {
-      cripto->mensagem[i] = cripto->mensagem[i];
+      cripto->mensagem[i] = cripto->mensagem[i] + 3;
     }
   }
-  printf("\nMensagem criptografada");
+  printf("\nMensagem criptografada => ");
   for (int i = 0; i < strlen(cripto->mensagem); i++) {
     putchar(cripto->mensagem[i]);
   }
+  printf("\n");
+  for (int i = 0; i < strlen(cripto->mensagem); i++) {
+    printf("%d", cripto->mensagem[i]);
+  }
 }
 
-int main() { return 0; }
+void descriptografar(urna *cripto) {
+  for (int i = 0; i < strlen(cripto->mensagem); ++i) {
+    cripto->mensagem[i] = (char)((int)cripto->mensagem[i] - 3);
+  }
+  printf("\nMensagem original =>");
+  printf(" %s", cripto->mensagem);
+  printf("\n");
+}
+
+int main() {
+  urna mensagem;
+  criptografa(&mensagem);
+  descriptografar(&mensagem);
+  printf("\n");
+
+  return 0;
+}
