@@ -24,6 +24,7 @@ int main() {
   Hash tab;
   int op, RA;
   char nome[81], email[41], turma;
+  Mat_aluno *aluno;
 
   for (int i = 0; i < N; i++) {
     tab[i] = NULL;
@@ -38,6 +39,56 @@ int main() {
     scanf("%d", &op);
   }
 
+  switch (op) {
+  case 1:
+    printf("\nRA => ");
+    scanf("%d", &RA);
+    printf("\nNome aluno => ");
+    scanf("%[^\n]s", nome);
+    printf("\nEmail aluno => ");
+    scanf("%[^\n]s", email);
+    printf("\nTurma ");
+    scanf("%c", &turma);
+
+    insere_Esp(tab, RA, nome, email, turma);
+    break;
+
+  case 2:
+    printf("\nRA do aluno a ser removido => ");
+    scanf("%d", &RA);
+    remove_Esp(tab, RA);
+    break;
+
+    printf("\nRA do aluno a ser buscado => ");
+    scanf("%d", &RA);
+    aluno = busca_Esp(tab, RA);
+
+    if (aluno != NULL) {
+      printf("\nAluno encontrado");
+      printf("\nRA => %d", aluno->RA);
+      printf("\nNome => %s", aluno->nome);
+      printf("\nEmail => %s", aluno->email);
+      printf("\nTurma => %c", aluno->turma);
+    } else {
+      printf("\nAluno nao encontrado");
+    }
+    break;
+
+  case 3:
+    printf("\nTamanho da tabela => %d", tamanho_Esp(tab));
+    break;
+
+  case 4:
+    for (int i = 0; i < N; i++) {
+      if (tab[i] != NULL) {
+        free(tab[i]);
+      }
+    }
+    return 0;
+  default:
+    printf("\nOpcao Invalida");
+    break;
+  }
   return 0;
 }
 
